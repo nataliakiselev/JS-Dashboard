@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <!-- <link rel="icon" type="image/x-icon" href="images/favicon.ico" sizes="32x32" /> -->
+  <link rel="icon" href="images/favicon.ico?v=2" />
+  <title>My Dashboard</title>
+
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="https://www.cssscript.com/demo/beautiful-growl-notification/light-theme.min.css">
+  <link rel="stylesheet" href="https://www.cssscript.com/demo/beautiful-growl-notification/dark-theme.min.css">
+  <link rel="stylesheet" href="https://www.cssscript.com/demo/beautiful-growl-notification/colored-theme.min.css">
+
+  <link rel='stylesheet' href="style.css" />
+
+  <script src="https://www.cssscript.com/demo/beautiful-growl-notification/growl-notification.min.js" defer></script>
+  <script src="main.js" type='module'></script>
+
+
+
+  <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js'></script> -->
+</head>
+
+<body>
+  <div class="container pb-5">
+    <header>
+      <div class="card-header  bg-secondary">
+        <h1 class="card-title mb-0 text-light">My Dashboard</h1>
+      </div>
+    </header>
+
+    <main>
+      <div class='row'>
+        <section id="weather" class="col-md-8 ">
+          <header class="card-header  bg-warning">
+            <h2 class="card-title mb-0 text-light">Weather</h2>
+          </header>
+          <div>
+            <form name="search-form" id="search-form">
+              <div class="form-row align-items-center p-0">
+                <div class="col ">
+                  <input class="form-control my-2" type="text" name="city" role="search" id="city"
+                    placeholder="enter your city" required>
+                </div>
+                <div class="col-auto ">
+                  <button type="submit" class="btn btn-outline-secondary">Search</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="target"> </div>
+        </section>
+        <section id='currency_converter' class="col-md ">
+          <header class="card-header  bg-warning">
+            <h2 class="card-title mb-0 text-light">Currency Converter</h2>
+          </header>
+          <div>
+            <div class="intro p-1 d-flex align-items-center ">
+              <p class="p-2 currency_info font-weight-bolder m-0">Use this instant currency converter for all major
+                currencies, with exchange rates that are updated several times a day.</p>
+            </div>
+            <form class='converter'>
+              <input type="number" name="from_amount" class='form-control mb-3' placeholder='Enter amount'>
+              <div class="input-group mb-3 lg">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">From</label>
+                </div>
+                <select name="from_currency" class="custom-select" id="inputGroupSelect01">
+                  <option selected>Select a Currency</option>
+
+                </select>
+              </div>
+              <div class="input-group mb-3 lg">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">To</label>
+                </div>
+                <select name="to_currency" class="custom-select" id="inputGroupSelect01">
+                  <option selected>Select a Currency</option>
+
+                </select>
+              </div>
+              <div class="input-group lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-lg">Result</span>
+                </div>
+                <input type="text" class="to_amount form-control" aria-label="Sizing example input" readonly
+                  aria-describedby="inputGroup-sizing-lg">
+              </div>
+
+            </form>
+          </div>
+      </div>
+
+      </section>
+      <section id="news">
+        <header class="card-header  bg-warning">
+          <h2 class="card-title text-light">News</h2>
+        </header>
+        <div class="target "></div>
+      </section>
+  </div>
+  </div>
+  </div>
+  </main>
+</body>
+
+</html>

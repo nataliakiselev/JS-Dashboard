@@ -1,0 +1,22 @@
+.weather_info {
+  background-color: rgba(255, 255, 255, 0.3);
+
+  width: 100%;
+}
+
+.intro {
+  background: url('https://www.monexfs.com/wp-content/uploads/2015/01/151.jpg')
+    center/cover;
+}
+.currency_info {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+#weather,
+#currency_converter {
+  margin-bottom: 30px;
+}
