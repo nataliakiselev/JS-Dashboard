@@ -1,88 +1,96 @@
-const newsInsertionPoint = document.querySelector('#news .target');
+const newsInsertionPoint = document.querySelector("#news .target");
 // const weatherSection = document.querySelector('#news');
 function renderNews(insertionPoint, data) {
-  const list = document.createElement('ul');
-  list.classList.add('list-group');
-  let HTML = '';
+  const list = document.createElement("ul");
+  list.classList.add("list-group");
+  let HTML = "";
 
   for (const story of data) {
-    HTML += `<li class="list-group-item"><img class='img-thumbnail mr-2' src="${story.urlToImage}" width="50" ><a href="${story.url}">${story.title}</a> by ${story.author}</li>`;
+    HTML += `<li class="list-group-item"><img class='img-thumbnail mr-2' src=${story.urlToImage} width="50" ><a href=${story.url}>${story.title}</a> by ${story.author}</li>`;
   }
   list.innerHTML = HTML;
-  insertionPoint.innerHTML = '';
+  insertionPoint.innerHTML = "";
   insertionPoint.append(list);
 }
 
 // Get NEWS
 fetch(
-  'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=8dee90b41a204fc99f1546b1d85b3a1a'
+  "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=8dee90b41a204fc99f1546b1d85b3a1a",
 )
   .then((resp) => resp.json()) //JSON.parse
   .then((news) => {
-    console.log('news', news);
+    console.log("news", news);
     renderNews(newsInsertionPoint, news.articles);
   })
   .catch((err) => {
-    console.log('error', err);
-  });
+    console.log(err);
+    GrowlNotification.notify({
+      title: "Error!",
+      description: "News fetch failed",
+      type: "warning",
+      position: "top-left",
+      closeWith: "button",
+      closeTimeout: 5000,
+    });
 
-// const response = await fetch(
-//   'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=8dee90b41a204fc99f1546b1d85b3a1a'
-// );
+    // const response = await fetch(
+    //   'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=8dee90b41a204fc99f1546b1d85b3a1a'
+    // );
 
-// const data = await response.json();
+    // const data = await response.json();
 
-// renderNews(newsInsertionPoint, data.articles)
+    // renderNews(newsInsertionPoint, data.articles)
 
-const weatherInsertionPoint = document.querySelector('#weather .target');
+    const weatherInsertionPoint = document.querySelector("#weather .target");
 
-function renderWeather(insertionPoint, data) {
-  insertionPoint.innerHTML = '';
-  const report = data.weather[0];
-  console.log('report', report);
+    function renderWeather(insertionPoint, data) {
+      insertionPoint.innerHTML = "";
+      const report = data.weather[0];
+      console.log("report", report);
 
-  const reportEl = document.createElement('div');
-  reportEl.classList.add('p-5', 'd-flex');
+      const reportEl = document.createElement("div");
+      reportEl.classList.add("p-5", "d-flex");
 
-  let backgroundImage;
-  switch (report.main.toLowerCase()) {
-    case 'rain':
-      backgroundImage =
-        'https://cdn.abcotvs.com/dip/images/5184599_031119-kgo-shutterstock-rain-img.jpg?w=1600';
-      break;
-    case 'clouds':
-      backgroundImage =
-        'https://www.almanac.com/sites/default/files/image_nodes/cloudy-sky.jpg';
-      break;
-    case 'snow':
-      backgroundImage =
-        'https://il5.picdn.net/shutterstock/videos/3215686/thumb/1.jpg';
-      break;
-    case 'clear':
-      backgroundImage =
-        'https://s19499.pcdn.co/wp-content/uploads/2018/09/blue-sky-with-bright-sun-picture-id947314334-1.jpg';
-      break;
-    case 'drizzle':
-      backgroundImage =
-        'https://cdn.abcotvs.com/dip/images/5184599_031119-kgo-shutterstock-rain-img.jpg?w=1600';
-      break;
-    case 'thunderstorm':
-      backgroundImage = 'http://i.ytimg.com/vi/el93AooFrgg/maxresdefault.jpg';
-      break;
-    case 'mist':
-      backgroundImage =
-        'http://3.bp.blogspot.com/-PsBYNl5ltF0/TeeF2HLv_QI/AAAAAAAAAKA/IVrqRAdx_TQ/s1600/Morning+mist%252C+Waitomo%252C+New+Zealand+Pictures.jpg';
-      break;
-    default:
-      backgroundImage =
-        'https://s19499.pcdn.co/wp-content/uploads/2018/09/blue-sky-with-bright-sun-picture-id947314334-1.jpg';
-  }
+      let backgroundImage;
+      switch (report.main.toLowerCase()) {
+        case "rain":
+          backgroundImage =
+            "https://cdn.abcotvs.com/dip/images/5184599_031119-kgo-shutterstock-rain-img.jpg?w=1600";
+          break;
+        case "clouds":
+          backgroundImage =
+            "https://www.almanac.com/sites/default/files/image_nodes/cloudy-sky.jpg";
+          break;
+        case "snow":
+          backgroundImage =
+            "https://il5.picdn.net/shutterstock/videos/3215686/thumb/1.jpg";
+          break;
+        case "clear":
+          backgroundImage =
+            "https://s19499.pcdn.co/wp-content/uploads/2018/09/blue-sky-with-bright-sun-picture-id947314334-1.jpg";
+          break;
+        case "drizzle":
+          backgroundImage =
+            "https://cdn.abcotvs.com/dip/images/5184599_031119-kgo-shutterstock-rain-img.jpg?w=1600";
+          break;
+        case "thunderstorm":
+          backgroundImage =
+            "http://i.ytimg.com/vi/el93AooFrgg/maxresdefault.jpg";
+          break;
+        case "mist":
+          backgroundImage =
+            "http://3.bp.blogspot.com/-PsBYNl5ltF0/TeeF2HLv_QI/AAAAAAAAAKA/IVrqRAdx_TQ/s1600/Morning+mist%252C+Waitomo%252C+New+Zealand+Pictures.jpg";
+          break;
+        default:
+          backgroundImage =
+            "https://s19499.pcdn.co/wp-content/uploads/2018/09/blue-sky-with-bright-sun-picture-id947314334-1.jpg";
+      }
 
-  reportEl.style.background = `url(${backgroundImage}) center/cover`;
+      reportEl.style.background = `url(${backgroundImage}) center/cover`;
 
-  const iconURL = `http://openweathermap.org/img/wn/${report.icon}@2x.png`;
+      const iconURL = `http://openweathermap.org/img/wn/${report.icon}@2x.png`;
 
-  reportEl.innerHTML = `
+      reportEl.innerHTML = `
   <div class='pr-3'>
   <h3 class='cityname'>${data.name}</h3> 
   <img src="${iconURL}" alt="${report.main}" /></div>
@@ -100,131 +108,135 @@ function renderWeather(insertionPoint, data) {
     </dl>
     `;
 
-  insertionPoint.append(reportEl);
-}
+      insertionPoint.append(reportEl);
+    }
 
-const searchForm = document.getElementById('search-form');
+    const searchForm = document.getElementById("search-form");
 
-searchForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  city = searchForm.querySelector('#city').value;
-  getWeather();
-});
-
-let city = 'London';
-const API_HOST = 'https://api.openweathermap.org';
-const API_VERSION = 2.5;
-const ENDPOINT_PATH = `/data/${API_VERSION}/weather`;
-
-const ENDPOINT = new URL(ENDPOINT_PATH, API_HOST);
-
-const settings = {
-  APPID: 'a4f972c7cd918778eddf518d569a928e',
-  units: 'metric',
-};
-
-const URL_PARAMS = new URLSearchParams();
-
-for (const [key, value] of Object.entries(settings)) {
-  console.log(key, value);
-  URL_PARAMS.append(key, value);
-}
-
-function getWeather() {
-  URL_PARAMS.set('q', city);
-  const FULL_API_URL = `${ENDPOINT}?${URL_PARAMS.toString()}`;
-  console.log('FULL_API_URL', FULL_API_URL);
-  fetch(FULL_API_URL)
-    .then((response) => {
-      if (response.status >= 200 && response.status < 300) {
-        return response.json();
-      } else {
-        throw response;
-      }
-    })
-    .then((data) => {
-      // console.log(data);
-      renderWeather(weatherInsertionPoint, data);
-    })
-    .catch((err) => {
-      GrowlNotification.notify({
-        title: 'Error!',
-        description: err.statusText || err.message || 'An error occured',
-        type: 'warning',
-        position: 'top-left',
-        closeWith: 'button',
-        closeTimeout: 5000,
-      });
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      city = searchForm.querySelector("#city").value;
+      getWeather();
     });
-}
-getWeather();
 
-//CURRENCY CONVERTER
+    let city = "London";
+    const API_HOST = "https://api.openweathermap.org";
+    const API_VERSION = 2.5;
+    const ENDPOINT_PATH = `/data/${API_VERSION}/weather`;
 
-const endpoint = 'https://api.exchangeratesapi.io/latest';
-const ratesByBase = {};
-const fromCurrency = document.querySelector('[name="from_currency"]');
-const toCurrency = document.querySelector('[name="to_currency"]');
-const form = document.querySelector('.converter');
-const amountInput = document.querySelector('[name="from_amount"]');
-const totalDisplay = document.querySelector('.to_amount');
+    const ENDPOINT = new URL(ENDPOINT_PATH, API_HOST);
 
-//populate selects:
-function generateOptions(options) {
-  return Object.entries(options)
-    .map(
-      ([currencyCode, currencyName]) =>
-        `<option value='${currencyCode}'>${currencyCode} - ${currencyName}</option>`
-    )
-    .join('');
-}
+    const settings = {
+      APPID: "a4f972c7cd918778eddf518d569a928e",
+      units: "metric",
+    };
 
-//fetch rates
-async function fetchRates(base = 'GBP') {
-  const res = await fetch(`${endpoint}?base=${base}`);
-  const rates = await res.json();
-  return rates;
-}
+    const URL_PARAMS = new URLSearchParams();
 
-//convert:
-async function convertCurrency(amount, from, to) {
-  // check if we already have the rates to convert from that currency
-  if (!ratesByBase[from]) {
-    const rates = await fetchRates(from);
-    // store them for next conversion
-    ratesByBase[from] = rates;
-  }
-  // convert that amount that was passed in
-  const rate = ratesByBase[from].rates[to];
-  const convertedTotal = amount * rate;
-  console.log(`${amount} ${from} is ${convertedTotal} in ${to}`);
-  return convertedTotal;
-}
+    for (const [key, value] of Object.entries(settings)) {
+      console.log(key, value);
+      URL_PARAMS.append(key, value);
+    }
 
-function formatTotal(amount, currency) {
-  return Intl.NumberFormat('en-UK', {
-    style: 'currency',
-    currency,
-  }).format(amount);
-}
+    function getWeather() {
+      URL_PARAMS.set("q", city);
+      const FULL_API_URL = `${ENDPOINT}?${URL_PARAMS.toString()}`;
+      console.log("FULL_API_URL", FULL_API_URL);
+      fetch(FULL_API_URL)
+        .then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response.json();
+          } else {
+            throw response;
+          }
+        })
+        .then((data) => {
+          // console.log(data);
+          renderWeather(weatherInsertionPoint, data);
+        })
+        .catch((err) => {
+          GrowlNotification.notify({
+            title: "Error!",
+            description: err.statusText || err.message || "An error occured",
+            type: "warning",
+            position: "top-left",
+            closeWith: "button",
+            closeTimeout: 5000,
+          });
+        });
+    }
+    getWeather();
 
-async function handleInput(e) {
-  const total = await convertCurrency(
-    amountInput.value,
-    fromCurrency.value,
-    toCurrency.value
-  );
-  console.log(total);
-  totalDisplay.value = formatTotal(total, toCurrency.value);
-}
+    //CURRENCY CONVERTER
 
-async function initApp() {
-  const currencies = await import('./currencies.js');
-  const optionsHTML = generateOptions(currencies.default);
-  console.log(optionsHTML);
-  fromCurrency.innerHTML = optionsHTML;
-  toCurrency.innerHTML = optionsHTML;
-  form.addEventListener('input', handleInput);
-}
+    const endpoint = "https://api.exchangeratesapi.io/latest";
+    const ratesByBase = {};
+    const fromCurrency = document.querySelector('[name="from_currency"]');
+    const toCurrency = document.querySelector('[name="to_currency"]');
+    const form = document.querySelector(".converter");
+    const amountInput = document.querySelector('[name="from_amount"]');
+    const totalDisplay = document.querySelector(".to_amount");
 
-form.addEventListener('mouseenter', initApp, { once: true });
+    //populate selects:
+    function generateOptions(options) {
+      return Object.entries(options)
+        .map(
+          ([currencyCode, currencyName]) =>
+            `<option value='${currencyCode}'>${currencyCode} - ${currencyName}</option>`,
+        )
+        .join("");
+    }
+
+    //fetch rates
+    async function fetchRates(base = "GBP") {
+      const res = await fetch(`${endpoint}?base=${base}`);
+      const rates = await res.json();
+      console.log(rates);
+      return rates;
+    }
+
+    //convert:
+    async function convertCurrency(amount, from, to) {
+      // check if we already have the rates to convert from that currency
+      if (!ratesByBase[from]) {
+        const rates = await fetchRates(from);
+        // store them for next conversion
+        ratesByBase[from] = rates;
+      }
+      // convert that amount that was passed in
+      const rate = ratesByBase[from].rates[to];
+      const convertedTotal = amount * rate;
+      // console.log(`${amount} ${from} is ${convertedTotal} in ${to}`);
+      return convertedTotal;
+    }
+
+    function formatTotal(amount, currency) {
+      return Intl.NumberFormat("en-UK", {
+        style: "currency",
+        currency,
+      }).format(amount);
+    }
+
+    async function handleInput(e) {
+      const total = await convertCurrency(
+        amountInput.value,
+        fromCurrency.value,
+        toCurrency.value,
+      );
+      console.log(total);
+      totalDisplay.value = formatTotal(total, toCurrency.value);
+      console.log(totalDisplay.value);
+    }
+
+    async function initApp() {
+      const currencies = await import("./currencies.js");
+      // console.log(currencies);
+      const optionsHTML = generateOptions(currencies.default);
+      // console.log(optionsHTML);
+      fromCurrency.innerHTML = optionsHTML;
+      toCurrency.innerHTML = optionsHTML;
+      form.addEventListener("input", handleInput);
+    }
+
+    form.addEventListener("mouseenter", initApp, { once: true });
+  });
