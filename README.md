@@ -3,7 +3,7 @@ App written in JS designed to demonstrate DOM manipulation, JS plugins, third pa
 Currency converter, news, weather. CSS using Bootstrap.
 upd: 
 
-### ✨ [Part preview](https://nataliakiselev.github.io/JS-Dashboard)  The news api is now only free in dev mode , accessible form localhost only. To see the whole project this needs to be run locally.
+### ✨ [Part preview](https://nataliakiselev.github.io/JS-Dashboard)  The news api used here is now only free in development mode, accessible form localhost. To see the whole project this needs to be run locally.
 
 ### todo
 replace the news api with a free service
