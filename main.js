@@ -1,6 +1,4 @@
-// import { NEWS_API_KEY, WEATHER_API_KEY } from "./modules/keys.js";
-const NEWS_API_KEY = "37000a2df3msh487bad8db2ee1c6p1544c2jsn60d53a607e70";
-const WEATHER_API_KEY = "a4f972c7cd918778eddf518d569a928e";
+import { NEWS_API_KEY, WEATHER_API_KEY } from "./modules/keys.js";
 
 const newsInsertionPoint = document.querySelector("#news .target");
 // const weatherSection = document.querySelector('#news');
@@ -37,7 +35,6 @@ const news_settings = {
 const NEWS_URL_PARAMS = new URLSearchParams();
 
 for (const [key, value] of Object.entries(news_settings)) {
-  console.log(key, value);
   NEWS_URL_PARAMS.append(key, value);
 }
 const NEWS_API_URL = `${NEWS_ENDPOINT}?${NEWS_URL_PARAMS.toString()}`;
@@ -164,7 +161,6 @@ const settings = {
 const URL_PARAMS = new URLSearchParams();
 
 for (const [key, value] of Object.entries(settings)) {
-  console.log(key, value);
   URL_PARAMS.append(key, value);
 }
 
