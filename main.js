@@ -10,10 +10,9 @@ function renderNews(insertionPoint, data) {
   for (const story of data) {
     HTML += `<li class="list-group-item"><img class='img-thumbnail mr-2' src=${
       story.image
-    } width="50"><a href=${story.url}>
-    ${story.title}</a>  
- 
-     <p>${story.summarization || story.description}</p>
+    } width="80" alt=${story.title}>
+    <a href=${story.url}>${story.title}</a>  
+    <p>${story.summarization || story.description}</p>
     </li>`;
   }
   list.innerHTML = HTML;
