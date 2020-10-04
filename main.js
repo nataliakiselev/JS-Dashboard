@@ -1,3 +1,5 @@
+import { NEWS_API_KEY, WEATHER_API_KEY } from "/keys.js";
+
 const newsInsertionPoint = document.querySelector("#news .target");
 // const weatherSection = document.querySelector('#news');
 function renderNews(insertionPoint, data) {
@@ -6,7 +8,11 @@ function renderNews(insertionPoint, data) {
   let HTML = "";
 
   for (const story of data) {
-    HTML += `<li class="list-group-item"><img class='img-thumbnail mr-2' src=${story.urlToImage} width="50" ><a href=${story.url}>${story.title}</a> by ${story.author}</li>`;
+    HTML += `<li class="list-group-item"><img class='img-thumbnail mr-2' src=${story.image} width="50"><a href=${story.url}>
+    ${story.title}</a>  
+ 
+     <p>${story.description}</p>
+    </li>`;
   }
   list.innerHTML = HTML;
   insertionPoint.innerHTML = "";
@@ -14,13 +20,36 @@ function renderNews(insertionPoint, data) {
 }
 
 // Get NEWS
-fetch(
-  "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=8dee90b41a204fc99f1546b1d85b3a1a",
-)
+const NEWS_API_HOST = "https://news67.p.rapidapi.com";
+
+const NEWS_ENDPOINT_PATH = "/trending";
+
+const NEWS_ENDPOINT = new URL(NEWS_ENDPOINT_PATH, NEWS_API_HOST);
+
+const news_settings = {
+  limit: "10",
+  langs: "en",
+  skip: "1",
+};
+
+const NEWS_URL_PARAMS = new URLSearchParams();
+
+for (const [key, value] of Object.entries(news_settings)) {
+  console.log(key, value);
+  NEWS_URL_PARAMS.append(key, value);
+}
+const NEWS_API_URL = `${NEWS_ENDPOINT}?${NEWS_URL_PARAMS.toString()}`;
+
+fetch(NEWS_API_URL, {
+  method: "GET",
+  headers: {
+    "x-rapidapi-key": NEWS_API_KEY,
+  },
+})
   .then((resp) => resp.json()) //JSON.parse
   .then((news) => {
     console.log("news", news);
-    renderNews(newsInsertionPoint, news.articles);
+    renderNews(newsInsertionPoint, news);
   })
   .catch((err) => {
     console.log(err);
@@ -126,7 +155,7 @@ const ENDPOINT_PATH = `/data/${API_VERSION}/weather`;
 const ENDPOINT = new URL(ENDPOINT_PATH, API_HOST);
 
 const settings = {
-  APPID: "a4f972c7cd918778eddf518d569a928e",
+  APPID: WEATHER_API_KEY,
   units: "metric",
 };
 
