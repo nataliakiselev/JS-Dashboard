@@ -1,4 +1,7 @@
-import { NEWS_API_KEY, WEATHER_API_KEY } from "/modules/keys.js";
+// import { NEWS_API_KEY, WEATHER_API_KEY } from "./modules/keys.js";
+const NEWS_API_KEY = "37000a2df3msh487bad8db2ee1c6p1544c2jsn60d53a607e70";
+const WEATHER_API_KEY = "a4f972c7cd918778eddf518d569a928e";
+
 const newsInsertionPoint = document.querySelector("#news .target");
 // const weatherSection = document.querySelector('#news');
 function renderNews(insertionPoint, data) {
@@ -47,7 +50,7 @@ fetch(NEWS_API_URL, {
 })
   .then((resp) => resp.json()) //JSON.parse
   .then((news) => {
-    console.log("news", news);
+    // console.log("news", news);
     renderNews(newsInsertionPoint, news);
   })
   .catch((err) => {
@@ -74,7 +77,7 @@ const weatherInsertionPoint = document.querySelector("#weather .target");
 function renderWeather(insertionPoint, data) {
   insertionPoint.innerHTML = "";
   const report = data.weather[0];
-  console.log("report", report);
+  // console.log("report", report);
 
   const reportEl = document.createElement("div");
   reportEl.classList.add("p-5", "d-flex");
@@ -168,7 +171,6 @@ for (const [key, value] of Object.entries(settings)) {
 function getWeather() {
   URL_PARAMS.set("q", city);
   const FULL_API_URL = `${ENDPOINT}?${URL_PARAMS.toString()}`;
-  console.log("FULL_API_URL", FULL_API_URL);
   fetch(FULL_API_URL)
     .then((response) => {
       if (response.status >= 200 && response.status < 300) {
