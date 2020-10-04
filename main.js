@@ -1,4 +1,4 @@
-import { NEWS_API_KEY, WEATHER_API_KEY } from "/keys.js";
+import { NEWS_API_KEY, WEATHER_API_KEY } from "./keys.js";
 
 const newsInsertionPoint = document.querySelector("#news .target");
 // const weatherSection = document.querySelector('#news');
