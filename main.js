@@ -1,5 +1,4 @@
-import { NEWS_API_KEY, WEATHER_API_KEY } from "./keys.js";
-
+import { NEWS_API_KEY, WEATHER_API_KEY } from "/modules/keys.js";
 const newsInsertionPoint = document.querySelector("#news .target");
 // const weatherSection = document.querySelector('#news');
 function renderNews(insertionPoint, data) {
@@ -251,13 +250,13 @@ async function handleInput(e) {
     fromCurrency.value,
     toCurrency.value,
   );
-  console.log(total);
+  // console.log(total);
   totalDisplay.value = formatTotal(total, toCurrency.value);
-  console.log(totalDisplay.value);
+  // console.log(totalDisplay.value);
 }
 
 async function initApp() {
-  const currencies = await import("./currencies.js");
+  const currencies = await import("/modules/currencies.js");
   // console.log(currencies);
   const optionsHTML = generateOptions(currencies.default);
   // console.log(optionsHTML);
