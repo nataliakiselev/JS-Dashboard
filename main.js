@@ -62,13 +62,6 @@ fetch(NEWS_API_URL, {
       closeTimeout: 5000,
     });
   });
-// const response = await fetch(
-//   'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=8dee90b41a204fc99f1546b1d85b3a1a'
-// );
-
-// const data = await response.json();
-
-// renderNews(newsInsertionPoint, data.articles)
 
 const weatherInsertionPoint = document.querySelector("#weather .target");
 
