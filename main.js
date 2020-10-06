@@ -37,7 +37,7 @@ for (const [key, value] of Object.entries(news_settings)) {
   NEWS_URL_PARAMS.append(key, value);
 }
 const NEWS_API_URL = `${NEWS_ENDPOINT}?${NEWS_URL_PARAMS.toString()}`;
-const NEWS_API_KEY = config.NEWS_API_KEY;
+const NEWS_API_KEY = process.env.NEWS_API_KEY;
 fetch(NEWS_API_URL, {
   method: "GET",
   headers: {
@@ -144,7 +144,7 @@ const API_VERSION = 2.5;
 const ENDPOINT_PATH = `/data/${API_VERSION}/weather`;
 
 const ENDPOINT = new URL(ENDPOINT_PATH, API_HOST);
-const WEATHER_API_KEY = config.WEATHER_API_KEY;
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 const settings = {
   APPID: WEATHER_API_KEY,
   units: "metric",
